@@ -1,7 +1,8 @@
 const graphql = require('graphql');
 const Book = require('../models/book');
 const Author = require('../models/author');
-const _ = require('lodash');
+
+// The schema describe the objects types, the relations between them, how to interact with...
 
 const {
     GraphQLObjectType,
@@ -43,6 +44,9 @@ const AuthorType = new GraphQLObjectType({
     })
 });
 
+// RootQuery : How the user can grab data.
+// Fields define how the front can get the data.
+// resolve : how to get data from database.
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
@@ -75,6 +79,8 @@ const RootQuery = new GraphQLObjectType({
     }
 });
 
+// Create, Update or Delete data.
+// .save() is a mongoose function to save data inside database.
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     fields: {
