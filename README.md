@@ -4,8 +4,6 @@ Personal project to learn :
 - [x] How to create a GraphQL server on Node.js
 - [x] Use MongoDB to store data
 - [x] Bind this data with a front-end application using React and Apollo
-- [x]
-- [x]
 
 
 ## Run the app
