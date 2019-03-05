@@ -8,8 +8,8 @@ import { ApolloProvider } from 'react-apollo';
 // use this data inside the application
 
 // components
-import BookList from './components/BookList';
-import AddBook from './components/AddBook';
+import PlayerList from './components/PlayerList';
+import AddPlayer from './components/AddPlayer';
 
 // apollo client setup
 const client = new ApolloClient({
@@ -21,9 +21,9 @@ class App extends Component {
     return (
         <ApolloProvider client={client}>
             <div id="main">
-                <h1>My reading list</h1>
-                <BookList />
-                <AddBook />
+                <h1>My team</h1>
+                <PlayerList />
+                <AddPlayer />
             </div>
         </ApolloProvider>
     );

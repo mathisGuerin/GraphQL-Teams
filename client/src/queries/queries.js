@@ -2,44 +2,44 @@ import { gql } from 'apollo-boost';
 
 // qql : write graphQL queries inside javascript files
 
-const getAuthorsQuery = gql`
+const getTeamsQuery = gql`
     {
-        authors {
+        teams {
             name
             id
         }
     }
 `;
 
-const getBooksQuery = gql`
+const getPlayersQuery = gql`
     {
-        books {
+        players {
             name
             id
         }
     }
 `;
 
-const addBookMutation = gql`
-    mutation AddBook($name: String!, $genre: String!, $authorId: ID!){
-        addBook(name: $name, genre: $genre, authorId: $authorId){
+const addPlayerMutation = gql`
+    mutation AddPlayer($name: String!, $position: String!, $teamId: ID!){
+        addPlayer(name: $name, position: $position, teamId: $teamId){
             name
             id
         }
     }
 `;
 
-const getBookQuery = gql`
-    query GetBook($id: ID){
-        book(id: $id) {
+const getPlayerQuery = gql`
+    query GetPlayer($id: ID){
+        player(id: $id) {
             id
             name
-            genre
-            author {
+            position
+            team {
                 id
                 name
-                age
-                books {
+                country
+                players {
                     name
                     id
                 }
@@ -48,4 +48,4 @@ const getBookQuery = gql`
     }
 `;
 
-export { getAuthorsQuery, getBooksQuery, addBookMutation, getBookQuery };
+export { getTeamsQuery, getPlayersQuery, addPlayerMutation, getPlayerQuery };

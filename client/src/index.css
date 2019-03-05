@@ -15,11 +15,11 @@ body{
     height: 100%;
 }
 
-#book-list{
+#player-list{
     padding: 0;
 }
 
-#book-list li{
+#player-list li{
     display: inline-block;
     margin: 12px;
     padding: 10px;
@@ -69,7 +69,7 @@ form button{
     left: 10px;
 }
 
-#book-details{
+#player-details{
     position: fixed;
     top: 0;
     right: 0;

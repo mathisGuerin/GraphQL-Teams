@@ -1,6 +1,6 @@
 const graphql = require('graphql');
-const Book = require('../models/book');
-const Author = require('../models/author');
+const Player = require('../models/player');
+const Team = require('../models/team');
 
 // The schema describe the objects types, the relations between them, how to interact with...
 
@@ -14,31 +14,31 @@ const {
     GraphQLNonNull
 } = graphql;
 
-const BookType = new GraphQLObjectType({
-    name: 'Book',
+const PlayerType = new GraphQLObjectType({
+    name: 'Player',
     fields: ( ) => ({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
-        genre: { type: GraphQLString },
-        author: {
-            type: AuthorType,
+        position: { type: GraphQLString },
+        team: {
+            type: TeamType,
             resolve(parent, args){
-                return Author.findById(parent.authorId);
+                return Team.findById(parent.teamId);
             }
         }
     })
 });
 
-const AuthorType = new GraphQLObjectType({
-    name: 'Author',
+const TeamType = new GraphQLObjectType({
+    name: 'Team',
     fields: ( ) => ({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
-        age: { type: GraphQLInt },
-        books: {
-            type: new GraphQLList(BookType),
+        country: { type: GraphQLString },
+        players: {
+            type: new GraphQLList(PlayerType),
             resolve(parent, args){
-                return Book.find({ authorId: parent.id });
+                return Player.find({ teamId: parent.id });
             }
         }
     })
@@ -50,30 +50,30 @@ const AuthorType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
-        book: {
-            type: BookType,
+        player: {
+            type: PlayerType,
             args: { id: { type: GraphQLID } },
             resolve(parent, args){
-                return Book.findById(args.id);
+                return Player.findById(args.id);
             }
         },
-        author: {
-            type: AuthorType,
+        team: {
+            type: TeamType,
             args: { id: { type: GraphQLID } },
             resolve(parent, args){
-                return Author.findById(args.id);
+                return Team.findById(args.id);
             }
         },
-        books: {
-            type: new GraphQLList(BookType),
+        players: {
+            type: new GraphQLList(PlayerType),
             resolve(parent, args){
-                return Book.find({});
+                return Player.find({});
             }
         },
-        authors: {
-            type: new GraphQLList(AuthorType),
+        teams: {
+            type: new GraphQLList(TeamType),
             resolve(parent, args){
-                return Author.find({});
+                return Team.find({});
             }
         }
     }
@@ -84,34 +84,34 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     fields: {
-        addAuthor: {
-            type: AuthorType,
+        addTeam: {
+            type: TeamType,
             args: {
                 name: { type: GraphQLString },
-                age: { type: GraphQLInt }
+                country: { type: GraphQLString }
             },
             resolve(parent, args){
-                let author = new Author({
+                let team = new Team({
                     name: args.name,
-                    age: args.age
+                    country: args.country
                 });
-                return author.save();
+                return team.save();
             }
         },
-        addBook: {
-            type: BookType,
+        addPlayer: {
+            type: PlayerType,
             args: {
                 name: { type: new GraphQLNonNull(GraphQLString) },
-                genre: { type: new GraphQLNonNull(GraphQLString) },
-                authorId: { type: new GraphQLNonNull(GraphQLID) }
+                position: { type: new GraphQLNonNull(GraphQLString) },
+                teamId: { type: new GraphQLNonNull(GraphQLID) }
             },
             resolve(parent, args){
-                let book = new Book({
+                let player = new Player({
                     name: args.name,
-                    genre: args.genre,
-                    authorId: args.authorId
+                    position: args.position,
+                    teamId: args.teamId
                 });
-                return book.save();
+                return player.save();
             }
         }
     }
