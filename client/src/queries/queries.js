@@ -1,5 +1,7 @@
 import { gql } from 'apollo-boost';
 
+// qql : write graphQL queries inside javascript files
+
 const getAuthorsQuery = gql`
     {
         authors {

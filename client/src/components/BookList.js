@@ -1,39 +1,37 @@
-import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
+import React, { useState } from 'react';
+import { Query } from 'react-apollo';
 import { getBooksQuery } from '../queries/queries';
 
 // components
 import BookDetails from './BookDetails';
 
-class BookList extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            selected: null
-        }
-    }
-    displayBooks(){
-        var data = this.props.data;
-        if(data.loading){
-            return( <div>Loading books...</div> );
-        } else {
-            return data.books.map(book => {
-                return(
-                    <li key={ book.id } onClick={ (e) => this.setState({ selected: book.id }) }>{ book.name }</li>
-                );
-            })
-        }
-    }
-    render(){
-        return(
-            <div>
-                <ul id="book-list">
-                    { this.displayBooks() }
-                </ul>
-                <BookDetails bookId={ this.state.selected } />
-            </div>
-        );
-    }
+function BookList() {
+    const [selected, setSelected] = useState(null);
+
+    return(
+        <Query query={getBooksQuery}>
+            {({loading, error, data}) => {
+                if(loading){
+                    return( <div>Loading books...</div> );
+                } else {
+                    return (
+                    <div>
+                        <ul id="book-list">
+                            {
+                                data.books.map(book => (
+                                    <li key={ book.id } onClick={ (e) => setSelected(book.id) }>{ book.name }</li>
+                                ))
+                            }
+                        </ul>
+                        <BookDetails bookId={ selected } />
+                    </div>
+                    )
+                }
+            }}
+        </Query>
+    );
 }
 
-export default graphql(getBooksQuery)(BookList);
+
+// Indide BookList, we have access to all the data provided by getBooksQuery via props
+export default BookList;
