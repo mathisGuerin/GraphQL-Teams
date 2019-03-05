@@ -29,6 +29,15 @@ const addPlayerMutation = gql`
     }
 `;
 
+const addTeamMutation = gql`
+    mutation AddTeam($name: String!, $country: String!){
+        addTeam(name: $name, country: $position){
+            name
+            id
+        }
+    }
+`;
+
 const getPlayerQuery = gql`
     query GetPlayer($id: ID){
         player(id: $id) {
@@ -48,4 +57,4 @@ const getPlayerQuery = gql`
     }
 `;
 
-export { getTeamsQuery, getPlayersQuery, addPlayerMutation, getPlayerQuery };
+export { getTeamsQuery, getPlayersQuery, addPlayerMutation, addTeamMutation, getPlayerQuery };

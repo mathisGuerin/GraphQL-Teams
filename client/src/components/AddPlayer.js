@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import { getTeamsQuery, addPlayerMutation, getPlayersQuery } from '../queries/queries';
-
+import { AddPlayerMain } from '../styles/AddPlayer'
 class AddPlayer extends Component {
     constructor(props){
         super(props);
@@ -38,7 +38,8 @@ class AddPlayer extends Component {
 
     render() {
         return (
-            <form id="add-player" onSubmit={ this.submitForm.bind(this) } >
+            <AddPlayerMain onSubmit={ this.submitForm.bind(this) } >
+                <h3>Create a new player</h3>
                 <div className="field">
                     <label>Player name:</label>
                     <input type="text" onChange={ (e) => this.setState({name: e.target.value})} />
@@ -55,7 +56,7 @@ class AddPlayer extends Component {
                     </select>
                 </div>
                 <button>+</button>
-            </form>
+            </AddPlayerMain>
         )
     }
 }

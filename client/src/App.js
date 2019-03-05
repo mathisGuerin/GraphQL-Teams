@@ -10,6 +10,9 @@ import { ApolloProvider } from 'react-apollo';
 // components
 import PlayerList from './components/PlayerList';
 import AddPlayer from './components/AddPlayer';
+import AddTeam from './components/AddTeam';
+
+import { Main, MainTitle } from './styles/App';
 
 // apollo client setup
 const client = new ApolloClient({
@@ -20,11 +23,12 @@ class App extends Component {
   render() {
     return (
         <ApolloProvider client={client}>
-            <div id="main">
-                <h1>My team</h1>
+            <Main>
+                <MainTitle>My team</MainTitle>
                 <PlayerList />
                 <AddPlayer />
-            </div>
+                <AddTeam />
+            </Main>
         </ApolloProvider>
     );
   }

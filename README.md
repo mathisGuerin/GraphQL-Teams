@@ -16,43 +16,42 @@ nodemon app
 
 - You can get or create data on graphiql http://localhost:4000/graphql
 
-Get all authors from the database and the name of their books.
+Get all teams from the database and the name of their players.
 ```javascript
 {
-  authors {
+  teams {
     name
-    age
-    books {
+    country
+    players {
       name
     }
   }
 }
 ```
 
-Get an author and the name of his books
+Get an team and the name of its players
 ```javascript
 {
-  author(id: "5c77f75f74059418190a66c9") {
+  team(id: "5c7e5cba50835148053dce3d") {
     name
-    age
-    books {
+    country
+    players {
       name
     }
   }
 }
 ```
 
-Add a new book
+Add a new player
 ```javascript
-mutation{
-    addBook(
-      name: "A super title",
-      genre: "Sci-fi",
-      authorId:"5c77f75f74059418190a66c9"
-    ) 
-    {
-      name
-      genre
-    }    
+mutation {
+  addPlayer(
+    name: "Mario Balotelli",
+    position: "Stricker",
+    teamId: "5c7e5cba50835148053dce3d"
+  ) 
+  {
+    name
+  }
 }
 ```
