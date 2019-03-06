@@ -6,7 +6,7 @@ export const PlayerDetailsMain = styled.div`
     right: 0;
     width: 40%;
     height: 100%;
-    background: #AD1457;
+    background: #0C8235;
     padding: 30px;
     overflow: auto;
     box-shadow: -2px -3px 5px rgba(0,0,0,0.3);

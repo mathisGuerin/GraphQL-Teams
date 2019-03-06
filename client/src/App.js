@@ -12,7 +12,7 @@ import PlayerList from './components/PlayerList';
 import AddPlayer from './components/AddPlayer';
 import AddTeam from './components/AddTeam';
 
-import { Main, MainTitle } from './styles/App';
+import { Main, MainTitle, Forms } from './styles/App';
 
 // apollo client setup
 const client = new ApolloClient({
@@ -26,8 +26,10 @@ class App extends Component {
             <Main>
                 <MainTitle>My team</MainTitle>
                 <PlayerList />
-                <AddPlayer />
-                <AddTeam />
+                <Forms>
+                    <AddPlayer />
+                    <AddTeam />
+                </Forms>
             </Main>
         </ApolloProvider>
     );

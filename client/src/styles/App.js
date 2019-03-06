@@ -11,3 +11,9 @@ export const MainTitle = styled.h1`
     color: #444;
     text-align: center;
 `
+
+export const Forms = styled.div`
+    position: absolute;
+    bottom: 0;
+    left: 0;
+`

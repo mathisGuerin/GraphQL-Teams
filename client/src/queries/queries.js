@@ -31,7 +31,7 @@ const addPlayerMutation = gql`
 
 const addTeamMutation = gql`
     mutation AddTeam($name: String!, $country: String!){
-        addTeam(name: $name, country: $position){
+        addTeam(name: $name, country: $country){
             name
             id
         }

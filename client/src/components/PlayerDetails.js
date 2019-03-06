@@ -3,30 +3,29 @@ import { Query } from 'react-apollo';
 import { getPlayerQuery } from '../queries/queries';
 import { PlayerDetailsMain } from '../styles/PlayerDetails';
 
-const displayPlayerDetails = (loading, error, data) => {
-  console.log('loading player detail ', loading);
-  console.log('data player detail ', data.player);
-  if (loading || data.player == null) {
-    return <div>No player selected...</div>;
-  } else {
-    const { player } = data;
-    return (
-      <div>
-        <h2>{player.name}</h2>
-        <p>{player.position}</p>
-        <p>{player.team.name}</p>
-        <p>All players on this team:</p>
-        <ul className="other-players">
-          {player.team.players.map(item => {
-            return <li key={item.id}>{item.name}</li>;
-          })}
-        </ul>
-      </div>
-    );
-  }
-};
-
 function PlayerDetails(props) {
+
+  const displayPlayerDetails = (loading, error, data) => {
+    if (loading || data.player == null) {
+      return <div>No player selected...</div>;
+    } else {
+      const { player } = data;
+      return (
+        <div>
+          <h2>{player.name}</h2>
+          <p>{player.position}</p>
+          <p>{player.team.name}</p>
+          <p>All players on this team:</p>
+          <ul className="other-players">
+            {player.team.players.map(item => {
+              return <li key={item.id}>{item.name}</li>;
+            })}
+          </ul>
+        </div>
+      );
+    }
+  };
+
   return (
     <Query query={getPlayerQuery} variables={{ id: props.playerId }}>
       {({ loading, error, data }) => {
