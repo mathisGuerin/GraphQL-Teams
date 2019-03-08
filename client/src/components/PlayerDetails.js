@@ -2,6 +2,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { getPlayerQuery } from '../queries/queries';
 import { PlayerDetailsMain } from '../styles/PlayerDetails';
+import UpdatePlayer from './UpdatePlayer';
 
 function PlayerDetails(props) {
 
@@ -10,6 +11,7 @@ function PlayerDetails(props) {
       return <div>No player selected...</div>;
     } else {
       const { player } = data;
+      console.log(player)
       return (
         <div>
           <h2>{player.name}</h2>
@@ -21,6 +23,7 @@ function PlayerDetails(props) {
               return <li key={item.id}>{item.name}</li>;
             })}
           </ul>
+          <UpdatePlayer player={player}/>
         </div>
       );
     }
