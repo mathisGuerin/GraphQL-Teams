@@ -83,7 +83,7 @@ class UpdatePlayer extends Component {
           <label>Team:</label>
           <select
             onChange={e => this.setState({ teamId: e.target.value })}
-            defaultValue={this.state.teamId}
+            value={this.state.teamId}
           >
             {this.displayTeams()}
           </select>
