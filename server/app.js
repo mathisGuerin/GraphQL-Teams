@@ -13,7 +13,7 @@ app.use(cors());
 // mongoose allow us to connect our node server with the mongo database
 // It provide some functions to do CRUD operations
 // connect to mongo database
-mongoose.connect('mongodb://mathis:mathis-graphql@cluster0-shard-00-00-nbesj.mongodb.net:27017,cluster0-shard-00-01-nbesj.mongodb.net:27017,cluster0-shard-00-02-nbesj.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true')
+mongoose.connect('mongodb://mathis:mathis-graphql@cluster0-shard-00-00-nbesj.mongodb.net:27017,cluster0-shard-00-01-nbesj.mongodb.net:27017,cluster0-shard-00-02-nbesj.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true', { useNewUrlParser: true })
 mongoose.connection.once('open', () => {
     console.log('conneted to database');
 });

@@ -16,6 +16,9 @@ const getPlayersQuery = gql`
         players {
             name
             id
+            team {
+                id
+            }
         }
     }
 `;
@@ -34,6 +37,9 @@ const updatePlayerMutation = gql`
         updatePlayer(id: $id, name: $name, position: $position, teamId: $teamId){
             name
             id
+            team {
+                id
+            }
         }
     }
 `;

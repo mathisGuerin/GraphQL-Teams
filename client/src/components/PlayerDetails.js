@@ -11,7 +11,6 @@ function PlayerDetails(props) {
       return <div>No player selected...</div>;
     } else {
       const { player } = data;
-      console.log(player)
       return (
         <div>
           <h2>{player.name}</h2>

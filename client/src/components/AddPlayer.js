@@ -25,15 +25,17 @@ class AddPlayer extends Component {
 
     submitForm(e){
         e.preventDefault()
-        // use the addPlayerMutation
-        this.props.addPlayerMutation({
-            variables: {
-                name: this.state.name,
-                position: this.state.position,
-                teamId: this.state.teamId
-            },
-            refetchQueries: [{ query: getPlayersQuery }]
-        });
+        if (this.state.name !== "" && this.state.position !== "" && this.state.teamId !== "") {
+            // use the addPlayerMutation
+            this.props.addPlayerMutation({
+                variables: {
+                    name: this.state.name,
+                    position: this.state.position,
+                    teamId: this.state.teamId
+                },
+                refetchQueries: [{ query: getPlayersQuery }]
+            });
+        }
     }
 
     render() {
@@ -42,15 +44,15 @@ class AddPlayer extends Component {
                 <h3>Create a new player</h3>
                 <div className="field">
                     <label>Player name:</label>
-                    <input type="text" onChange={ (e) => this.setState({name: e.target.value})} />
+                    <input required type="text" onChange={ (e) => this.setState({name: e.target.value})} />
                 </div>
                 <div className="field">
                     <label>Position:</label>
-                    <input type="text" onChange={ (e) => this.setState({position: e.target.value})} />
+                    <input required type="text" onChange={ (e) => this.setState({position: e.target.value})} />
                 </div>
                 <div className="field">
                     <label>Team:</label>
-                    <select onChange={ (e) => this.setState({ teamId: e.target.value }) } >
+                    <select required onChange={ (e) => this.setState({ teamId: e.target.value }) } >
                         <option>Select team</option>
                         { this.displayTeams() }
                     </select>

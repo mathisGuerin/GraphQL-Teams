@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import {
   getTeamsQuery,
-  addPlayerMutation,
   getPlayersQuery,
   updatePlayerMutation,
 } from '../queries/queries';
@@ -56,7 +55,7 @@ class UpdatePlayer extends Component {
         position: this.state.position,
         teamId: this.state.teamId,
       },
-      refetchQueries: [{ query: getPlayersQuery }],
+      refetchQueries: [ {query: getPlayersQuery}, {query: getTeamsQuery} ],
     });
   }
 

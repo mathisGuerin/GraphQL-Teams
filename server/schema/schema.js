@@ -54,6 +54,7 @@ const RootQuery = new GraphQLObjectType({
             type: PlayerType,
             args: { id: { type: GraphQLID } },
             resolve(parent, args){
+                console.log("Getting player ", args.id)
                 return Player.findById(args.id);
             }
         },
@@ -61,18 +62,21 @@ const RootQuery = new GraphQLObjectType({
             type: TeamType,
             args: { id: { type: GraphQLID } },
             resolve(parent, args){
+                console.log("Getting team ", args.id)
                 return Team.findById(args.id);
             }
         },
         players: {
             type: new GraphQLList(PlayerType),
             resolve(parent, args){
+                console.log("Getting players ")
                 return Player.find({});
             }
         },
         teams: {
             type: new GraphQLList(TeamType),
             resolve(parent, args){
+                console.log("Getting teams ")
                 return Team.find({});
             }
         }
@@ -123,6 +127,7 @@ const Mutation = new GraphQLObjectType({
                 teamId: { type: GraphQLID }
             },
             resolve(parent, args){
+                console.log("Updating player ", args.name)
                 return Player.findByIdAndUpdate(
                     args.id,
                     {$set:{name: args.name, position: args.position, teamId: args.teamId}},
