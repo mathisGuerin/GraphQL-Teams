@@ -1,18 +1,22 @@
 import React from 'react';
-import { Query } from 'react-apollo';
-import { getPlayerQuery } from '../queries/queries';
-import { PlayerDetailsMain } from '../styles/PlayerDetails';
+import { Query, Mutation } from 'react-apollo';
+import {
+  getPlayerQuery,
+  getPlayersQuery,
+  deletePlayerMutation,
+} from '../queries/queries';
+import { PlayerDetailsMain, PlayerDetailsWrapper, DeleteButton } from '../styles/PlayerDetails';
 import UpdatePlayer from './UpdatePlayer';
+import { FaTrash } from 'react-icons/fa';
 
 function PlayerDetails(props) {
-
   const displayPlayerDetails = (loading, error, data) => {
     if (loading || data.player == null) {
       return <div>No player selected...</div>;
     } else {
       const { player } = data;
       return (
-        <div>
+        <PlayerDetailsWrapper>
           <h2>{player.name}</h2>
           <p>{player.position}</p>
           <p>{player.team.name}</p>
@@ -22,8 +26,25 @@ function PlayerDetails(props) {
               return <li key={item.id}>{item.name}</li>;
             })}
           </ul>
-          <UpdatePlayer player={player}/>
-        </div>
+          <UpdatePlayer player={player} />
+          <Mutation
+            mutation={deletePlayerMutation}
+            refetchQueries={[
+              { query: getPlayersQuery },
+              { query: getPlayerQuery, variables: { id: player.id } },
+            ]}
+          >
+            {(deletePlayer, { data }) => (
+              <DeleteButton title="Delete this player"
+                onClick={() => {
+                  deletePlayer({ variables: { id: player.id } });
+                }}
+              >
+                <FaTrash size={18}/>
+              </DeleteButton>
+            )}
+          </Mutation>
+        </PlayerDetailsWrapper>
       );
     }
   };

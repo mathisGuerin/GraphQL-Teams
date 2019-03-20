@@ -142,6 +142,7 @@ const Mutation = new GraphQLObjectType({
                 id:  { type: new GraphQLNonNull(GraphQLID) },
             },
             resolve(parent, args){
+                console.log("DELETING player ", args.id)
                 return Player.findByIdAndDelete(args.id)
             }
         }

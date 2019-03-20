@@ -13,3 +13,18 @@ export const PlayerDetailsMain = styled.div`
     box-sizing: border-box;
     color: #fff;
 `
+
+export const PlayerDetailsWrapper = styled.div `
+    position: relative;
+`;
+
+export const DeleteButton = styled.button`  
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 40px;
+    width: 40px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+`;
