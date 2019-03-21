@@ -9,6 +9,10 @@ class AddTeam extends Component {
     this.state = {
       name: '',
       country: '',
+      colors: {
+        mainColor: '#dedede',
+        secondaryColor: '#ab1233'
+      }
     };
   }
 
@@ -18,6 +22,7 @@ class AddTeam extends Component {
       variables: {
         name: this.state.name,
         country: this.state.country,
+        colors: this.state.colors
       },
       refetchQueries: [{ query: getTeamsQuery }],
     });
@@ -39,6 +44,20 @@ class AddTeam extends Component {
           <input
             type="text"
             onChange={e => this.setState({ country: e.target.value })}
+          />
+        </div>
+        <div className="field">
+          <label>Main color</label>
+          <input
+            type="text"
+            onChange={e => this.setState({ colors: {...this.state.colors, mainColor: e.target.value}} )}
+          />
+        </div>
+        <div className="field">
+          <label>Secondary color</label>
+          <input
+            type="text"
+            onChange={e => this.setState({ colors: {...this.state.colors, secondaryColor: e.target.value} })}
           />
         </div>
         <button>+</button>

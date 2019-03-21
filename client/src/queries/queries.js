@@ -50,10 +50,14 @@ const updatePlayerMutation = gql`
 `;
 
 const addTeamMutation = gql`
-  mutation AddTeam($name: String!, $country: String!) {
-    addTeam(name: $name, country: $country) {
+  mutation AddTeam($name: String!, $country: String!, $colors: ColorInput!) {
+    addTeam(name: $name, country: $country, colors: $colors) {
       name
       id
+      colors {
+        mainColor
+        secondaryColor
+      }
     }
   }
 `;
@@ -85,6 +89,14 @@ const deletePlayerMutation = gql`
   }
 `;
 
+const deleteTeamMutation = gql`
+  mutation DeleteTeam($id: ID!) {
+    deleteTeam(id: $id) {
+      id
+    }
+  }
+`;
+
 export {
   getTeamsQuery,
   getPlayersQuery,
@@ -93,4 +105,5 @@ export {
   addTeamMutation,
   getPlayerQuery,
   deletePlayerMutation,
+  deleteTeamMutation
 };
