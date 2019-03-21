@@ -6,6 +6,7 @@ const Team = require('../models/team');
 
 const {
     GraphQLObjectType,
+    GraphQLInputObjectType,
     GraphQLString,
     GraphQLSchema,
     GraphQLID,
@@ -35,12 +36,30 @@ const TeamType = new GraphQLObjectType({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         country: { type: GraphQLString },
+        colors: { type: ColorType },
         players: {
             type: new GraphQLList(PlayerType),
             resolve(parent, args){
                 return Player.find({ teamId: parent.id });
             }
         }
+    })
+});
+
+const ColorType = new GraphQLObjectType({
+    name: 'Color',
+    fields: ( ) => ({
+        mainColor: { type: GraphQLString },
+        secondaryColor: { type: GraphQLString }
+    })
+});
+
+
+const ColorInputType = new GraphQLInputObjectType({
+    name: 'ColorInput',
+    fields: ( ) => ({
+        mainColor: { type: GraphQLString },
+        secondaryColor: { type: GraphQLString }
     })
 });
 
@@ -92,12 +111,14 @@ const Mutation = new GraphQLObjectType({
             type: TeamType,
             args: {
                 name: { type: GraphQLString },
-                country: { type: GraphQLString }
+                country: { type: GraphQLString },
+                colors: { type: ColorInputType }
             },
             resolve(parent, args){
                 let team = new Team({
                     name: args.name,
-                    country: args.country
+                    country: args.country,
+                    colors: args.colors
                 });
                 return team.save();
             }
@@ -144,6 +165,16 @@ const Mutation = new GraphQLObjectType({
             resolve(parent, args){
                 console.log("DELETING player ", args.id)
                 return Player.findByIdAndDelete(args.id)
+            }
+        },
+        deleteTeam: {
+            type: TeamType,
+            args: {
+                id:  { type: new GraphQLNonNull(GraphQLID) },
+            },
+            resolve(parent, args){
+                console.log("DELETING team ", args.id)
+                return Team.findByIdAndDelete(args.id)
             }
         }
     }

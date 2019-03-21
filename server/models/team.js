@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const teamSchema = new Schema({
     name: String,
-    country: String
+    country: String,
+    colors: Object
 });
 
 module.exports = mongoose.model('Team', teamSchema);
