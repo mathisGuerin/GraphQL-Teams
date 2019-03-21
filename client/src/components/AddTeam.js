@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import { addTeamMutation, getTeamsQuery } from '../queries/queries';
 import { AddTeamForm } from '../styles/AddTeam';
+import { HuePicker } from 'react-color';
 
 class AddTeam extends Component {
   constructor(props) {
@@ -28,6 +29,14 @@ class AddTeam extends Component {
     });
   }
 
+  handleChangeCompleteMain = (color) => {
+    this.setState({ colors: {...this.state.colors, mainColor: color.hex}} )
+  };
+
+  handleChangeCompleteSecondary = (color) => {
+    this.setState({ colors: {...this.state.colors, secondaryColor: color.hex}} )
+  };
+
   render() {
     return (
       <AddTeamForm onSubmit={this.submitForm.bind(this)}>
@@ -48,16 +57,18 @@ class AddTeam extends Component {
         </div>
         <div className="field">
           <label>Main color</label>
-          <input
-            type="text"
-            onChange={e => this.setState({ colors: {...this.state.colors, mainColor: e.target.value}} )}
+          <HuePicker
+            color={this.state.colors.mainColor}
+            onChangeComplete={ this.handleChangeCompleteMain }
+            width= {'185px'}
           />
         </div>
         <div className="field">
           <label>Secondary color</label>
-          <input
-            type="text"
-            onChange={e => this.setState({ colors: {...this.state.colors, secondaryColor: e.target.value} })}
+          <HuePicker
+            color={this.state.colors.secondaryColor}
+            onChangeComplete={ this.handleChangeCompleteSecondary }
+            width= {'185px'}
           />
         </div>
         <button>+</button>

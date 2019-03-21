@@ -21,6 +21,7 @@ function TeamList() {
                   <TeamListItem
                     key={team.id}
                     onClick={e => setSelected(team.id)}
+                    colors={team.colors}
                   >
                     {team.name}
                     <Mutation
