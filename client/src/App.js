@@ -11,6 +11,7 @@ import { ApolloProvider } from 'react-apollo';
 import PlayerList from './components/PlayerList';
 import AddPlayer from './components/AddPlayer';
 import AddTeam from './components/AddTeam';
+import TeamList from './components/TeamList';
 
 import { Main, MainTitle, Forms } from './styles/App';
 
@@ -24,8 +25,10 @@ class App extends Component {
     return (
         <ApolloProvider client={client}>
             <Main>
-                <MainTitle>My team</MainTitle>
+                <MainTitle>My players</MainTitle>
                 <PlayerList />
+                <MainTitle>Lists of teams</MainTitle>
+                <TeamList/>
                 <Forms>
                     <AddPlayer />
                     <AddTeam />
