@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { Query, Mutation } from 'react-apollo';
 import {
   getPlayerQuery,
@@ -19,13 +19,17 @@ function PlayerDetails(props) {
         <PlayerDetailsWrapper>
           <h2>{player.name}</h2>
           <p>{player.position}</p>
-          <p>{player.team.name}</p>
-          <p>All players on this team:</p>
-          <ul className="other-players">
-            {player.team.players.map(item => {
-              return <li key={item.id}>{item.name}</li>;
-            })}
-          </ul>
+          {player.team && (
+            <Fragment>
+            <p>{player.team.name}</p>
+            <p>All players on this team:</p>
+            <ul className="other-players">
+              {player.team.players.map(item => {
+                return <li key={item.id}>{item.name}</li>;
+              })}
+            </ul>
+            </Fragment>
+          )}
           <UpdatePlayer player={player} />
           <Mutation
             mutation={deletePlayerMutation}

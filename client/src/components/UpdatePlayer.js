@@ -13,8 +13,8 @@ class UpdatePlayer extends Component {
       id: this.props.player.id,
       name: this.props.player.name,
       position: this.props.player.position,
-      team: this.props.player.team.name,
-      teamId: this.props.player.team.id,
+      team: this.props.player.team ? this.props.player.team.name : '',
+      teamId: this.props.player.team ? this.props.player.team.id : '',
     };
   }
 
@@ -24,8 +24,8 @@ class UpdatePlayer extends Component {
         id: nextProps.player.id,
         name: nextProps.player.name,
         position: nextProps.player.position,
-        team: nextProps.player.team.name,
-        teamId: nextProps.player.team.id,
+        team: nextProps.player.team ? nextProps.player.team.name : '',
+        teamId: nextProps.player.team ? nextProps.player.team.id : '',
       });
     }
   }
