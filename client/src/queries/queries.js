@@ -7,6 +7,10 @@ const getTeamsQuery = gql`
     teams {
       name
       id
+      colors {
+        mainColor
+        secondaryColor
+      }
     }
   }
 `;
