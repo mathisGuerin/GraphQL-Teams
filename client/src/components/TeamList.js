@@ -33,7 +33,12 @@ function TeamList() {
                       {(deleteTeam, { data }) => (
                         <FaTrash onClick={() => {
                         deleteTeam({ variables: { id: team.id } });
-                        }} size={10} style={{padding: '0 10px'}}/>
+                        }} size={10} style={{ 
+                          color: '#6b6b6b',
+                          padding: '5px 5px',
+                          margin: '0px 10px',
+                          borderRadius: '50%',
+                          backgroundColor: 'white'}}/>
                       )}
                     </Mutation>
                   </TeamListItem>
