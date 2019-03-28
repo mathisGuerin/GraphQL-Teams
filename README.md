@@ -1,13 +1,19 @@
-# GraphQL-books
+# GraphQL-teams
 Personal project to learn :
 
 - [x] How to create a GraphQL server on Node.js
 - [x] Use MongoDB to store data
 - [x] Bind this data with a front-end application using React and Apollo
 
+This application allow you to get and create informations about players and teams. You can create new players, link them to a team, create new teams, update their informations (country, colors...). You can also delete players and teams.
+
+All the data is stored in a Mongo database. I use Mongoose, a Object Data Modeling, to convert object in code to their representation in MongoDB.
+I created a NodeJS back-end with express-graphql.
 
 ## Run the app
 - Install nodemon to restart server automatically when some changes are detected.
+
+- Inside a .env file, add the URL of your Mongo database : MONGO_DB_URL='mongodb://<USER>:<PASSWORD>@cluster0-shard-00-00-nbesj.mongodb.net:27017,cluster0-shard-00-01-nbesj.mongodb.net:27017,cluster0-shard-00-02-nbesj.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true'
 
 ```bash
 npm install nodemon -g
